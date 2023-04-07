@@ -31,8 +31,9 @@ class AppServiceProvider extends ServiceProvider
             $post = $this->where('id', $id)->exists();
             return $post ? response()->json(["data" => $this->find($id)],200) : response()->json(["message"=>'Post not found'], 404);
         });
-        Builder::macro('postExistsOrNot', function ($id) {
-            return $this->where('id', $id)->exists();
+        Builder::macro('postExistsEagerLoad', function ($id) {
+            $post = $this->where('id', $id)->exists();
+            return $post ? response()->json(Post::find($id)->comments,200) : response()->json(["message" =>"Post not found"],404);
           
         });
         

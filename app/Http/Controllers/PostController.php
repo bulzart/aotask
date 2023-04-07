@@ -76,7 +76,7 @@ public function addComment($id,Request $req)
  
 }
 public function listAllPostComments($id){
-  return Post::query()->postExistsOrNot($id) ? Post::find($id)->comments : response()->json(["message" =>"Post not found"],404);
+  return Post::query()->postExistsEagerLoad($id);
 }
 
 }

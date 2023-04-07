@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     public function render($request, $exception)
     {
         if ($exception instanceof AuthenticationException || $exception instanceof InvalidSignatureException) {
-            return response()->json(['message' => 'Unauthorized.'], 401);
+            return response()->json(['message' => 'Unauthorized or invalid token.'], 401);
         }
 
         return parent::render($request, $exception);
